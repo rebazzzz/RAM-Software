@@ -41,7 +41,7 @@ const ComponentLoader = {
           <nav class="hidden md:flex items-center gap-8 text-sm font-medium nav-desktop">
             <a href="services.html" class="nav-link ${currentPage === "services.html" ? "text-primary" : ""}">Services</a>
             <a href="work.html" class="nav-link ${currentPage === "work.html" ? "text-primary" : ""}">Case Studies</a>
-            <a href="index.html#vision" class="nav-link ${currentPage === "index.html" ? "text-primary" : ""}">About</a>
+            <a href="index.html#vision" class="nav-link ${currentPage === "index.html" ? "text-primary" : ""}">Vision</a>
             <a href="book-call.html" class="nav-link ${currentPage === "book-call.html" ? "text-primary" : ""}">Contact</a>
             <a href="book-call.html" class="btn btn-primary">Book a Call</a>
           </nav>
@@ -56,7 +56,7 @@ const ComponentLoader = {
           <div class="px-6 py-4 space-y-4">
             <a href="services.html" class="block nav-link ${currentPage === "services.html" ? "text-primary" : ""}">Services</a>
             <a href="work.html" class="block nav-link ${currentPage === "work.html" ? "text-primary" : ""}">Case Studies</a>
-            <a href="index.html#vision" class="block nav-link ${currentPage === "index.html" ? "text-primary" : ""}">About</a>
+            <a href="index.html#vision" class="block nav-link ${currentPage === "index.html" ? "text-primary" : ""}">Vision</a>
             <a href="index.html#contact" class="block nav-link">Contact</a>
             <a href="book-call.html" class="btn btn-primary w-full">Book a Call</a>
           </div>
@@ -84,12 +84,12 @@ const ComponentLoader = {
                 <span class="text-xl font-extrabold tracking-tight text-charcoal">RAM Software</span>
               </div>
               <p class="text-slate-500 max-w-sm leading-relaxed">
-                Building the next generation of scalable digital systems. From Stockholm to the world.
+                Building the next generation of scalable digital systems. From Gothenburg to the world.
               </p>
               <div class="flex gap-4">
-                <a href="#" class="social-link" aria-label="Twitter">
+                <a href="https://instagram.com/ramsoftware" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
                   <svg class="size-5 fill-current" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                   </svg>
                 </a>
                 <a href="#" class="social-link" aria-label="LinkedIn">
@@ -102,10 +102,10 @@ const ComponentLoader = {
             <div class="space-y-6">
               <h4 class="font-bold text-charcoal">Company</h4>
               <ul class="space-y-4 text-slate-500 text-sm">
-                <li><a href="index.html#vision" class="hover:text-primary transition-colors">About Us</a></li>
                 <li><a href="services.html" class="hover:text-primary transition-colors">Services</a></li>
-                <li><a href="work.html" class="hover:text-primary transition-colors">Work</a></li>
+                <li><a href="work.html" class="hover:text-primary transition-colors">Case Studies</a></li>
                 <li><a href="index.html#vision" class="hover:text-primary transition-colors">Vision</a></li>
+                <li><a href="index.html#vision" class="hover:text-primary transition-colors">FAQ</a></li>
               </ul>
             </div>
 
@@ -113,10 +113,9 @@ const ComponentLoader = {
             <div class="space-y-6">
               <h4 class="font-bold text-charcoal">Services</h4>
               <ul class="space-y-4 text-slate-500 text-sm">
-                <li><a href="services.html" class="hover:text-primary transition-colors">Web Development</a></li>
-                <li><a href="services.html" class="hover:text-primary transition-colors">AI Systems</a></li>
-                <li><a href="services.html" class="hover:text-primary transition-colors">Mobile Engineering</a></li>
-                <li><a href="services.html" class="hover:text-primary transition-colors">Cloud Infra</a></li>
+                <li><a href="services.html" class="hover:text-primary transition-colors">Custom Web Platforms</a></li>
+                <li><a href="services.html" class="hover:text-primary transition-colors">AI & Automation</a></li>
+                <li><a href="services.html" class="hover:text-primary transition-colors">Product Development</a></li>
               </ul>
             </div>
           </div>
