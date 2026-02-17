@@ -41,8 +41,8 @@ const ComponentLoader = {
           <nav class="hidden md:flex items-center gap-8 text-sm font-medium nav-desktop">
             <a href="services.html" class="nav-link ${currentPage === "services.html" ? "text-primary" : ""}">Services</a>
             <a href="work.html" class="nav-link ${currentPage === "work.html" ? "text-primary" : ""}">Case Studies</a>
-            <a href="index.html#vision" class="nav-link">About</a>
-            <a href="index.html#contact" class="nav-link">Contact</a>
+            <a href="index.html#vision" class="nav-link ${currentPage === "index.html" ? "text-primary" : ""}">About</a>
+            <a href="book-call.html" class="nav-link ${currentPage === "book-call.html" ? "text-primary" : ""}">Contact</a>
             <a href="book-call.html" class="btn btn-primary">Book a Call</a>
           </nav>
           
@@ -56,7 +56,7 @@ const ComponentLoader = {
           <div class="px-6 py-4 space-y-4">
             <a href="services.html" class="block nav-link ${currentPage === "services.html" ? "text-primary" : ""}">Services</a>
             <a href="work.html" class="block nav-link ${currentPage === "work.html" ? "text-primary" : ""}">Case Studies</a>
-            <a href="index.html#vision" class="block nav-link">About</a>
+            <a href="index.html#vision" class="block nav-link ${currentPage === "index.html" ? "text-primary" : ""}">About</a>
             <a href="index.html#contact" class="block nav-link">Contact</a>
             <a href="book-call.html" class="btn btn-primary w-full">Book a Call</a>
           </div>
@@ -199,14 +199,12 @@ const ComponentLoader = {
 
   /**
    * Highlight current navigation item based on URL
+   * Note: Primary highlighting is done in loadHeader() with conditional classes
+   * This function is kept for any additional highlighting needs
    */
   highlightCurrentNav() {
-    const currentPath = window.location.pathname;
-    document.querySelectorAll(".nav-link").forEach((link) => {
-      if (link.getAttribute("href")?.includes(currentPath.split("/").pop())) {
-        link.classList.add("text-primary");
-      }
-    });
+    // Primary highlighting is done in loadHeader() with conditional classes
+    // This function is kept for backward compatibility
   },
 };
 
