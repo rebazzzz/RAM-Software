@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies | RAM Software Admin</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3c83f6",
+                        "background-light": "#F9FAFB",
+                        "background-dark": "#101722",
+                        charcoal: "#111827",
+                        sidebar: "#1e293b",
+                        "sidebar-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body class="font-display bg-gray-50">
+
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-sidebar text-white flex flex-col flex-shrink-0 transition-all duration-300" id="sidebar">
+            <div class="h-16 flex items-center gap-3 px-6 border-b border-gray-700/50">
+                <div class="size-8 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="material-symbols-outlined text-lg">terminal</span>
+                </div>
+                <span class="font-bold text-lg tracking-tight">RAM Admin</span>
+            </div>
+
+            <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-3 text-xs font-bold text-gray-400 uppercase tracking-wider">Management</div>
+
+                <a href="bookings.html" class="nav-item">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <span>Bookings</span>
+                </a>
+
+                <a href="case-studies.html" class="nav-item active">
+                    <span class="material-symbols-outlined">work</span>
+                    <span>Case Studies</span>
+                    <span class="ml-auto bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">6</span>
+                </a>
+
+                <a href="content.html" class="nav-item">
+                    <span class="material-symbols-outlined">edit_note</span>
+                    <span>Content</span>
+                </a>
+
+                <a href="media.html" class="nav-item">
+                    <span class="material-symbols-outlined">image</span>
+                    <span>Media Library</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-3 text-xs font-bold text-gray-400 uppercase tracking-wider">Settings</div>
+
+                <a href="settings.html" class="nav-item">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span>Settings</span>
+                </a>
+
+                <a href="users.html" class="nav-item">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>Team Members</span>
+                </a>
+            </nav>
+
+            <div class="border-t border-gray-700/50 p-4">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="size-10 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                        AD
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-semibold text-white truncate">Admin User</p>
+                        <p class="text-xs text-gray-400 truncate">admin@ramsoftware.com</p>
+                    </div>
+                    <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                        <span class="material-symbols-outlined">logout</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 flex-shrink-0">
+                <div class="flex items-center gap-4">
+                    <button id="sidebar-toggle" class="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                    <h1 class="text-xl font-bold text-charcoal">Case Studies</h1>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button class="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                        <span class="material-symbols-outlined text-gray-600">notifications</span>
+                        <span class="absolute top-1 right-1 size-2 bg-red-500 rounded-full"></span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="flex-1 overflow-y-auto p-8">
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+                            <input type="text" placeholder="Search case studies..."
+                                class="pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 w-64">
+                        </div>
+
+                        <select
+                            class="px-4 pr-10 py-2 bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-primary text-sm font-medium text-gray-600 appearance-none bg-no-repeat bg-right-3 bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%236b7280%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e')] bg-[length:1rem]">
+                            <option value="">All Categories</option>
+                            <option value="web">Web Platform</option>
+                            <option value="ecommerce">E-commerce</option>
+                            <option value="mobile">Mobile App</option>
+                            <option value="ai">AI/ML</option>
+                        </select>
+
+                    </div>
+
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-xl hover:bg-blue-600 transition-colors text-sm font-semibold shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined text-lg">add</span>
+                        Add Case Study
+                    </button>
+                </div>
+
+                <!-- Case Studies Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Case Study Card 1 -->
+                    <div
+                        class="bg-white rounded-2xl border border-gray-200 overflow-hidden group hover:shadow-lg transition-all">
+                        <div class="relative aspect-video bg-gray-100 overflow-hidden">
+                            <img src="../assets/images/jisek.webp" alt="Jisek"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors"
+                                    title="Edit">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors"
+                                    title="Delete">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
+                            <div class="absolute top-3 left-3">
+                                <span class="px-2 py-1 bg-primary/90 text-white text-xs font-bold rounded-lg">Web
+                                    Platform</span>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-charcoal text-lg mb-2">Jisek Ekonomi Partner</h3>
+                            <p class="text-sm text-gray-500 line-clamp-2 mb-4">Complete website rebuild with member
+                                functionality, membership benefits, and news features.</p>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-400">Updated 2 days ago</span>
+                                <span class="flex items-center gap-1 text-green-600 font-semibold">
+                                    <span class="material-symbols-outlined text-sm">visibility</span>
+                                    Published
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Study Card 2 -->
+                    <div
+                        class="bg-white rounded-2xl border border-gray-200 overflow-hidden group hover:shadow-lg transition-all">
+                        <div class="relative aspect-video bg-gray-100 overflow-hidden">
+                            <img src="../assets/images/failvideor.jpg" alt="Failvideor"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
+                            <div class="absolute top-3 left-3">
+                                <span
+                                    class="px-2 py-1 bg-purple-500/90 text-white text-xs font-bold rounded-lg">E-commerce</span>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-charcoal text-lg mb-2">Failvideor</h3>
+                            <p class="text-sm text-gray-500 line-clamp-2 mb-4">Website reconstruction with integrated
+                                payment solutions and social media integration.</p>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-400">Updated 1 week ago</span>
+                                <span class="flex items-center gap-1 text-green-600 font-semibold">
+                                    <span class="material-symbols-outlined text-sm">visibility</span>
+                                    Published
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Study Card 3 -->
+                    <div
+                        class="bg-white rounded-2xl border border-gray-200 overflow-hidden group hover:shadow-lg transition-all">
+                        <div class="relative aspect-video bg-gray-100 overflow-hidden">
+                            <img src="../assets/images/betalent.webp" alt="BeTalent"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
+                            <div class="absolute top-3 left-3">
+                                <span
+                                    class="px-2 py-1 bg-orange-500/90 text-white text-xs font-bold rounded-lg">Webshop</span>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-charcoal text-lg mb-2">BeTalent</h3>
+                            <p class="text-sm text-gray-500 line-clamp-2 mb-4">Full featured webshop with integrated
+                                payments, product management, and inventory handling.</p>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-400">Updated 3 days ago</span>
+                                <span class="flex items-center gap-1 text-green-600 font-semibold">
+                                    <span class="material-symbols-outlined text-sm">visibility</span>
+                                    Published
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Study Card 4 -->
+                    <div
+                        class="bg-white rounded-2xl border border-gray-200 overflow-hidden group hover:shadow-lg transition-all">
+                        <div class="relative aspect-video bg-gray-100 overflow-hidden">
+                            <img src="../assets/images/carria.webp" alt="Carria"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
+                            <div class="absolute top-3 left-3">
+                                <span
+                                    class="px-2 py-1 bg-pink-500/90 text-white text-xs font-bold rounded-lg">Mobile</span>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-charcoal text-lg mb-2">Carria</h3>
+                            <p class="text-sm text-gray-500 line-clamp-2 mb-4">Mobile-first platform with real-time
+                                tracking and advanced analytics dashboard.</p>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-400">Updated 2 weeks ago</span>
+                                <span class="flex items-center gap-1 text-gray-400 font-semibold">
+                                    <span class="material-symbols-outlined text-sm">visibility_off</span>
+                                    Draft
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Study Card 5 -->
+                    <div
+                        class="bg-white rounded-2xl border border-gray-200 overflow-hidden group hover:shadow-lg transition-all">
+                        <div class="relative aspect-video bg-gray-100 overflow-hidden">
+                            <img src="../assets/images/steammaster.webp" alt="SteamMaster"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
+                            <div class="absolute top-3 left-3">
+                                <span class="px-2 py-1 bg-blue-500/90 text-white text-xs font-bold rounded-lg">Web
+                                    Platform</span>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-charcoal text-lg mb-2">SteamMaster</h3>
+                            <p class="text-sm text-gray-500 line-clamp-2 mb-4">Industrial IoT platform with real-time
+                                monitoring and predictive maintenance.</p>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-400">Updated 5 days ago</span>
+                                <span class="flex items-center gap-1 text-green-600 font-semibold">
+                                    <span class="material-symbols-outlined text-sm">visibility</span>
+                                    Published
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Study Card 6 -->
+                    <div
+                        class="bg-white rounded-2xl border border-gray-200 overflow-hidden group hover:shadow-lg transition-all">
+                        <div class="relative aspect-video bg-gray-100 overflow-hidden">
+                            <img src="../assets/images/megic mike.webp" alt="Megic Mike"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
+                            <div class="absolute top-3 left-3">
+                                <span
+                                    class="px-2 py-1 bg-green-500/90 text-white text-xs font-bold rounded-lg">AI/ML</span>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-charcoal text-lg mb-2">Megic Mike</h3>
+                            <p class="text-sm text-gray-500 line-clamp-2 mb-4">AI-powered content generation platform
+                                with custom LLM fine-tuning.</p>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-400">Updated 1 day ago</span>
+                                <span class="flex items-center gap-1 text-green-600 font-semibold">
+                                    <span class="material-symbols-outlined text-sm">visibility</span>
+                                    Published
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

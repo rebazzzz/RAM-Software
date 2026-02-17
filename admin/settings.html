@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | RAM Software Admin</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3c83f6",
+                        "background-light": "#F9FAFB",
+                        "background-dark": "#101722",
+                        charcoal: "#111827",
+                        sidebar: "#1e293b",
+                        "sidebar-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body class="font-display bg-gray-50">
+
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-sidebar text-white flex flex-col flex-shrink-0 transition-all duration-300" id="sidebar">
+            <div class="h-16 flex items-center gap-3 px-6 border-b border-gray-700/50">
+                <div class="size-8 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="material-symbols-outlined text-lg">terminal</span>
+                </div>
+                <span class="font-bold text-lg tracking-tight">RAM Admin</span>
+            </div>
+
+            <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-3 text-xs font-bold text-gray-400 uppercase tracking-wider">Management</div>
+
+                <a href="bookings.html" class="nav-item">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <span>Bookings</span>
+                </a>
+
+                <a href="case-studies.html" class="nav-item">
+                    <span class="material-symbols-outlined">work</span>
+                    <span>Case Studies</span>
+                </a>
+
+                <a href="content.html" class="nav-item">
+                    <span class="material-symbols-outlined">edit_note</span>
+                    <span>Content</span>
+                </a>
+
+                <a href="media.html" class="nav-item">
+                    <span class="material-symbols-outlined">image</span>
+                    <span>Media Library</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-3 text-xs font-bold text-gray-400 uppercase tracking-wider">Settings</div>
+
+                <a href="settings.html" class="nav-item active">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span>Settings</span>
+                </a>
+
+                <a href="users.html" class="nav-item">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>Team Members</span>
+                </a>
+            </nav>
+
+            <div class="border-t border-gray-700/50 p-4">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="size-10 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                        AD
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-semibold text-white truncate">Admin User</p>
+                        <p class="text-xs text-gray-400 truncate">admin@ramsoftware.com</p>
+                    </div>
+                    <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                        <span class="material-symbols-outlined">logout</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 flex-shrink-0">
+                <div class="flex items-center gap-4">
+                    <button id="sidebar-toggle" class="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                    <h1 class="text-xl font-bold text-charcoal">Settings</h1>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-colors text-sm font-semibold shadow-lg shadow-green-500/20">
+                        <span class="material-symbols-outlined text-lg">save</span>
+                        Save Changes
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="flex-1 overflow-y-auto p-8">
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <!-- General Settings -->
+                    <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
+                            <span class="material-symbols-outlined text-primary text-2xl">business</span>
+                            <div>
+                                <h2 class="text-lg font-bold text-charcoal">Company Information</h2>
+                                <p class="text-sm text-gray-500">Basic company details</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Company Name</label>
+                                <input type="text" value="RAM Software AB"
+                                    class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-primary">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                                    <input type="email" value="contact@ramsoftware.com"
+                                        class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Phone</label>
+                                    <input type="tel" value="+46 70 123 4567"
+                                        class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-primary">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Address</label>
+                                <textarea rows="2"
+                                    class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-primary resize-none">Stureplan 4C, 4th Floor&#10;114 35 Stockholm, Sweden</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
+                            <span class="material-symbols-outlined text-purple-500 text-2xl">notifications</span>
+                            <div>
+                                <h2 class="text-lg font-bold text-charcoal">Notifications</h2>
+                                <p class="text-sm text-gray-500">Email notification preferences</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <label class="flex items-center justify-between p-3 bg-gray-50 rounded-xl cursor-pointer">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-gray-400">email</span>
+                                    <div>
+                                        <p class="font-semibold text-charcoal">New Booking Alerts</p>
+                                        <p class="text-sm text-gray-500">Get notified when someone books a call</p>
+                                    </div>
+                                </div>
+                                <input type="checkbox" checked class="w-5 h-5 text-primary rounded focus:ring-primary">
+                            </label>
+
+                            <label class="flex items-center justify-between p-3 bg-gray-50 rounded-xl cursor-pointer">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-gray-400">update</span>
+                                    <div>
+                                        <p class="font-semibold text-charcoal">Content Updates</p>
+                                        <p class="text-sm text-gray-500">When team members update content</p>
+                                    </div>
+                                </div>
+                                <input type="checkbox" checked class="w-5 h-5 text-primary rounded focus:ring-primary">
+                            </label>
+
+                            <label class="flex items-center justify-between p-3 bg-gray-50 rounded-xl cursor-pointer">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-gray-400">security</span>
+                                    <div>
+                                        <p class="font-semibold text-charcoal">Security Alerts</p>
+                                        <p class="text-sm text-gray-500">Login attempts and security events</p>
+                                    </div>
+                                </div>
+                                <input type="checkbox" checked class="w-5 h-5 text-primary rounded focus:ring-primary">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Security -->
+                    <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
+                            <span class="material-symbols-outlined text-green-500 text-2xl">security</span>
+                            <div>
+                                <h2 class="text-lg font-bold text-charcoal">Security</h2>
+                                <p class="text-sm text-gray-500">Password and authentication</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Current Password</label>
+                                <input type="password" placeholder="••••••••"
+                                    class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-primary">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">New Password</label>
+                                    <input type="password" placeholder="••••••••"
+                                        class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Confirm
+                                        Password</label>
+                                    <input type="password" placeholder="••••••••"
+                                        class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-primary">
+                                </div>
+                            </div>
+
+                            <button
+                                class="px-4 py-2 bg-primary text-white rounded-xl hover:bg-blue-600 transition-colors text-sm font-semibold">
+                                Update Password
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="bg-red-50 rounded-2xl border border-red-200 p-6">
+                        <div class="flex items-center gap-3 mb-6">
+                            <span class="material-symbols-outlined text-red-500 text-2xl">warning</span>
+                            <div>
+                                <h2 class="text-lg font-bold text-red-600">Danger Zone</h2>
+                                <p class="text-sm text-red-500">Irreversible actions</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div
+                                class="flex items-center justify-between p-4 bg-white rounded-xl border border-red-100">
+                                <div>
+                                    <p class="font-semibold text-charcoal">Export All Data</p>
+                                    <p class="text-sm text-gray-500">Download a backup of all your data</p>
+                                </div>
+                                <button
+                                    class="px-4 py-2 border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors text-sm font-semibold text-gray-600">
+                                    Export
+                                </button>
+                            </div>
+
+                            <div
+                                class="flex items-center justify-between p-4 bg-white rounded-xl border border-red-100">
+                                <div>
+                                    <p class="font-semibold text-charcoal">Clear All Bookings</p>
+                                    <p class="text-sm text-gray-500">Delete all booking history</p>
+                                </div>
+                                <button
+                                    class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition-colors text-sm font-semibold">
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

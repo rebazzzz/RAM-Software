@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Library | RAM Software Admin</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3c83f6",
+                        "background-light": "#F9FAFB",
+                        "background-dark": "#101722",
+                        charcoal: "#111827",
+                        sidebar: "#1e293b",
+                        "sidebar-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body class="font-display bg-gray-50">
+
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-sidebar text-white flex flex-col flex-shrink-0 transition-all duration-300" id="sidebar">
+            <div class="h-16 flex items-center gap-3 px-6 border-b border-gray-700/50">
+                <div class="size-8 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="material-symbols-outlined text-lg">terminal</span>
+                </div>
+                <span class="font-bold text-lg tracking-tight">RAM Admin</span>
+            </div>
+
+            <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-3 text-xs font-bold text-gray-400 uppercase tracking-wider">Management</div>
+
+                <a href="bookings.html" class="nav-item">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <span>Bookings</span>
+                </a>
+
+                <a href="case-studies.html" class="nav-item">
+                    <span class="material-symbols-outlined">work</span>
+                    <span>Case Studies</span>
+                </a>
+
+                <a href="content.html" class="nav-item">
+                    <span class="material-symbols-outlined">edit_note</span>
+                    <span>Content</span>
+                </a>
+
+                <a href="media.html" class="nav-item active">
+                    <span class="material-symbols-outlined">image</span>
+                    <span>Media Library</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-3 text-xs font-bold text-gray-400 uppercase tracking-wider">Settings</div>
+
+                <a href="settings.html" class="nav-item">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span>Settings</span>
+                </a>
+
+                <a href="users.html" class="nav-item">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>Team Members</span>
+                </a>
+            </nav>
+
+            <div class="border-t border-gray-700/50 p-4">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="size-10 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                        AD
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-semibold text-white truncate">Admin User</p>
+                        <p class="text-xs text-gray-400 truncate">admin@ramsoftware.com</p>
+                    </div>
+                    <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                        <span class="material-symbols-outlined">logout</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 flex-shrink-0">
+                <div class="flex items-center gap-4">
+                    <button id="sidebar-toggle" class="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                    <h1 class="text-xl font-bold text-charcoal">Media Library</h1>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-xl hover:bg-blue-600 transition-colors text-sm font-semibold shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined text-lg">cloud_upload</span>
+                        Upload Files
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="flex-1 overflow-y-auto p-8">
+                <!-- Stats -->
+                <div class="grid grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white rounded-xl border border-gray-200 p-4">
+                        <p class="text-2xl font-bold text-charcoal">142</p>
+                        <p class="text-sm text-gray-500">Total Files</p>
+                    </div>
+                    <div class="bg-white rounded-xl border border-gray-200 p-4">
+                        <p class="text-2xl font-bold text-charcoal">128 MB</p>
+                        <p class="text-sm text-gray-500">Storage Used</p>
+                    </div>
+                    <div class="bg-white rounded-xl border border-gray-200 p-4">
+                        <p class="text-2xl font-bold text-charcoal">98</p>
+                        <p class="text-sm text-gray-500">Images</p>
+                    </div>
+                    <div class="bg-white rounded-xl border border-gray-200 p-4">
+                        <p class="text-2xl font-bold text-charcoal">44</p>
+                        <p class="text-sm text-gray-500">Documents</p>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+                            <input type="text" placeholder="Search media..."
+                                class="pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 w-64">
+                        </div>
+
+                        <select
+                            class="px-4 py-2 bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-primary text-sm font-medium text-gray-600">
+                            <option value="">All Types</option>
+                            <option value="images">Images</option>
+                            <option value="documents">Documents</option>
+                            <option value="videos">Videos</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center gap-2 bg-white border border-gray-200 rounded-xl p-1">
+                        <button id="grid-view-btn" class="p-2 rounded-lg bg-primary text-white transition-colors"
+                            onclick="setGridView()">
+                            <span class="material-symbols-outlined">grid_view</span>
+                        </button>
+                        <button id="list-view-btn"
+                            class="p-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors"
+                            onclick="setListView()">
+                            <span class="material-symbols-outlined">list</span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Media Grid -->
+                <div id="media-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+
+                    <!-- Media Item -->
+                    <div
+                        class="group relative bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                        <div class="aspect-square bg-gray-100 relative">
+                            <img src="../assets/images/jisek.webp" alt="" class="w-full h-full object-cover">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">visibility</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <p class="text-sm font-medium text-charcoal truncate">jisek.webp</p>
+                            <p class="text-xs text-gray-400">24 KB • Image</p>
+                        </div>
+                    </div>
+
+                    <!-- Media Item -->
+                    <div
+                        class="group relative bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                        <div class="aspect-square bg-gray-100 relative">
+                            <img src="../assets/images/failvideor.jpg" alt="" class="w-full h-full object-cover">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">visibility</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <p class="text-sm font-medium text-charcoal truncate">failvideor.jpg</p>
+                            <p class="text-xs text-gray-400">18 KB • Image</p>
+                        </div>
+                    </div>
+
+                    <!-- Media Item -->
+                    <div
+                        class="group relative bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                        <div class="aspect-square bg-gray-100 relative">
+                            <img src="../assets/images/betalent.webp" alt="" class="w-full h-full object-cover">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">visibility</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <p class="text-sm font-medium text-charcoal truncate">betalent.webp</p>
+                            <p class="text-xs text-gray-400">32 KB • Image</p>
+                        </div>
+                    </div>
+
+                    <!-- Media Item -->
+                    <div
+                        class="group relative bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                        <div class="aspect-square bg-gray-100 relative">
+                            <img src="../assets/images/carria.webp" alt="" class="w-full h-full object-cover">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">visibility</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <p class="text-sm font-medium text-charcoal truncate">carria.webp</p>
+                            <p class="text-xs text-gray-400">28 KB • Image</p>
+                        </div>
+                    </div>
+
+                    <!-- Media Item -->
+                    <div
+                        class="group relative bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                        <div class="aspect-square bg-gray-100 relative">
+                            <img src="../assets/images/steammaster.webp" alt="" class="w-full h-full object-cover">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">visibility</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <p class="text-sm font-medium text-charcoal truncate">steammaster.webp</p>
+                            <p class="text-xs text-gray-400">45 KB • Image</p>
+                        </div>
+                    </div>
+
+                    <!-- Media Item -->
+                    <div
+                        class="group relative bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                        <div class="aspect-square bg-gray-100 relative">
+                            <img src="../assets/images/megic mike.webp" alt="" class="w-full h-full object-cover">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">visibility</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <p class="text-sm font-medium text-charcoal truncate">megic-mike.webp</p>
+                            <p class="text-xs text-gray-400">38 KB • Image</p>
+                        </div>
+                    </div>
+
+                    <!-- Document Item -->
+                    <div
+                        class="group relative bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                        <div class="aspect-square bg-gray-50 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-6xl text-red-500">description</span>
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">download</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <p class="text-sm font-medium text-charcoal truncate">project-proposal.pdf</p>
+                            <p class="text-xs text-gray-400">2.4 MB • PDF</p>
+                        </div>
+                    </div>
+
+                    <!-- Document Item -->
+                    <div
+                        class="group relative bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                        <div class="aspect-square bg-gray-50 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-6xl text-blue-500">description</span>
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-primary hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">download</span>
+                                </button>
+                                <button
+                                    class="p-2 bg-white rounded-lg text-charcoal hover:bg-red-500 hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <p class="text-sm font-medium text-charcoal truncate">contract-template.docx</p>
+                            <p class="text-xs text-gray-400">156 KB • Document</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script>
+        function setGridView() {
+            document.getElementById('media-grid').className = 'grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4';
+            document.getElementById('grid-view-btn').className = 'p-2 rounded-lg bg-primary text-white transition-colors';
+            document.getElementById('list-view-btn').className = 'p-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors';
+        }
+
+        function setListView() {
+            document.getElementById('media-grid').className = 'flex flex-col gap-4';
+            document.getElementById('grid-view-btn').className = 'p-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors';
+            document.getElementById('list-view-btn').className = 'p-2 rounded-lg bg-primary text-white transition-colors';
+        }
+    </script>
+</body>
+
+
+</html>

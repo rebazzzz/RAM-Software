@@ -108,6 +108,8 @@ const ComponentLoader = {
                 <li><a href="index.html#vision" class="hover:text-primary transition-colors">Vision</a></li>
               </ul>
             </div>
+
+
             <div class="space-y-6">
               <h4 class="font-bold text-charcoal">Services</h4>
               <ul class="space-y-4 text-slate-500 text-sm">

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | RAM Software Admin</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3c83f6",
+                        "background-light": "#F9FAFB",
+                        "background-dark": "#101722",
+                        charcoal: "#111827",
+                        sidebar: "#1e293b",
+                        "sidebar-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body class="font-display bg-gray-50">
+
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-sidebar text-white flex flex-col flex-shrink-0 transition-all duration-300" id="sidebar">
+            <!-- Logo -->
+            <div class="h-16 flex items-center gap-3 px-6 border-b border-gray-700/50">
+                <div class="size-8 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="material-symbols-outlined text-lg">terminal</span>
+                </div>
+                <span class="font-bold text-lg tracking-tight">RAM Admin</span>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+                <a href="dashboard.html" class="nav-item active">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-3 text-xs font-bold text-gray-400 uppercase tracking-wider">Management</div>
+
+                <a href="bookings.html" class="nav-item">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <span>Bookings</span>
+                    <span class="ml-auto bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">12</span>
+                </a>
+
+                <a href="case-studies.html" class="nav-item">
+                    <span class="material-symbols-outlined">work</span>
+                    <span>Case Studies</span>
+                </a>
+
+                <a href="content.html" class="nav-item">
+                    <span class="material-symbols-outlined">edit_note</span>
+                    <span>Content</span>
+                </a>
+
+                <a href="media.html" class="nav-item">
+                    <span class="material-symbols-outlined">image</span>
+                    <span>Media Library</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-3 text-xs font-bold text-gray-400 uppercase tracking-wider">Settings</div>
+
+                <a href="settings.html" class="nav-item">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span>Settings</span>
+                </a>
+
+                <a href="users.html" class="nav-item">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>Team Members</span>
+                </a>
+            </nav>
+
+            <!-- User Profile -->
+            <div class="border-t border-gray-700/50 p-4">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="size-10 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                        AD
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-semibold text-white truncate">Admin User</p>
+                        <p class="text-xs text-gray-400 truncate">admin@ramsoftware.com</p>
+                    </div>
+                    <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                        <span class="material-symbols-outlined">logout</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 flex-shrink-0">
+                <div class="flex items-center gap-4">
+                    <button id="sidebar-toggle" class="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                    <h1 class="text-xl font-bold text-charcoal">Dashboard</h1>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <!-- Search -->
+                    <div class="hidden md:flex items-center bg-gray-100 rounded-lg px-3 py-2">
+                        <span class="material-symbols-outlined text-gray-400 text-lg">search</span>
+                        <input type="text" placeholder="Search..."
+                            class="bg-transparent border-none outline-none text-sm ml-2 w-48">
+                    </div>
+
+                    <!-- Notifications -->
+                    <button class="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                        <span class="material-symbols-outlined text-gray-600">notifications</span>
+                        <span class="absolute top-1 right-1 size-2 bg-red-500 rounded-full"></span>
+                    </button>
+
+                    <!-- Quick Actions -->
+                    <a href="../index.html" target="_blank"
+                        class="hidden sm:flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-lg">open_in_new</span>
+                        View Site
+                    </a>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="flex-1 overflow-y-auto p-8">
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="stat-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="size-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined text-2xl">calendar_month</span>
+                            </div>
+                            <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full">+3
+                                today</span>
+                        </div>
+                        <h3 class="text-3xl font-black text-charcoal">24</h3>
+                        <p class="text-sm text-gray-500 font-medium">New Bookings</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="size-12 bg-purple-500/10 rounded-xl flex items-center justify-center text-purple-500">
+                                <span class="material-symbols-outlined text-2xl">work</span>
+                            </div>
+                            <span class="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">6
+                                active</span>
+                        </div>
+                        <h3 class="text-3xl font-black text-charcoal">18</h3>
+                        <p class="text-sm text-gray-500 font-medium">Case Studies</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="size-12 bg-orange-500/10 rounded-xl flex items-center justify-center text-orange-500">
+                                <span class="material-symbols-outlined text-2xl">visibility</span>
+                            </div>
+                            <span
+                                class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full">+12.5%</span>
+                        </div>
+                        <h3 class="text-3xl font-black text-charcoal">2,847</h3>
+                        <p class="text-sm text-gray-500 font-medium">Page Views</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="size-12 bg-green-500/10 rounded-xl flex items-center justify-center text-green-500">
+                                <span class="material-symbols-outlined text-2xl">check_circle</span>
+                            </div>
+                            <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full">92%</span>
+                        </div>
+                        <h3 class="text-3xl font-black text-charcoal">156</h3>
+                        <p class="text-sm text-gray-500 font-medium">Completed Projects</p>
+                    </div>
+                </div>
+
+                <!-- Main Grid -->
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Recent Bookings -->
+                    <div class="lg:col-span-2 bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                        <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+                            <div>
+                                <h2 class="text-lg font-bold text-charcoal">Recent Bookings</h2>
+                                <p class="text-sm text-gray-500">Latest strategy call inquiries</p>
+                            </div>
+                            <a href="bookings.html" class="text-sm font-semibold text-primary hover:underline">View
+                                All</a>
+                        </div>
+
+                        <div class="divide-y divide-gray-100">
+                            <div class="p-4 hover:bg-gray-50 transition-colors flex items-center gap-4">
+                                <div
+                                    class="size-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                    JD
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-charcoal">John Doe</h4>
+                                    <p class="text-sm text-gray-500">TechCorp Inc. • Web Development</p>
+                                </div>
+                                <div class="text-right">
+                                    <span
+                                        class="text-xs font-bold text-yellow-600 bg-yellow-50 px-2 py-1 rounded-full">New</span>
+                                    <p class="text-xs text-gray-400 mt-1">2 hours ago</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 hover:bg-gray-50 transition-colors flex items-center gap-4">
+                                <div
+                                    class="size-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                    SM
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-charcoal">Sarah Miller</h4>
+                                    <p class="text-sm text-gray-500">StartupXYZ • AI Integration</p>
+                                </div>
+                                <div class="text-right">
+                                    <span
+                                        class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-full">Contacted</span>
+                                    <p class="text-xs text-gray-400 mt-1">Yesterday</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 hover:bg-gray-50 transition-colors flex items-center gap-4">
+                                <div
+                                    class="size-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                    MK
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-charcoal">Mike Johnson</h4>
+                                    <p class="text-sm text-gray-500">Global Systems • Cloud Infrastructure</p>
+                                </div>
+                                <div class="text-right">
+                                    <span
+                                        class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full">Scheduled</span>
+                                    <p class="text-xs text-gray-400 mt-1">2 days ago</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 hover:bg-gray-50 transition-colors flex items-center gap-4">
+                                <div
+                                    class="size-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                    AL
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-charcoal">Anna Lee</h4>
+                                    <p class="text-sm text-gray-500">Design Studio • Mobile App</p>
+                                </div>
+                                <div class="text-right">
+                                    <span
+                                        class="text-xs font-bold text-gray-600 bg-gray-100 px-2 py-1 rounded-full">Completed</span>
+                                    <p class="text-xs text-gray-400 mt-1">3 days ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions & Activity -->
+                    <div class="space-y-6">
+                        <!-- Quick Actions -->
+                        <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                            <h2 class="text-lg font-bold text-charcoal mb-4">Quick Actions</h2>
+                            <div class="space-y-3">
+                                <a href="bookings.html" class="quick-action">
+                                    <span class="material-symbols-outlined text-primary">add_circle</span>
+                                    <span class="flex-1 font-medium text-charcoal">New Booking</span>
+                                    <span class="material-symbols-outlined text-gray-400">arrow_forward</span>
+                                </a>
+                                <a href="case-studies.html" class="quick-action">
+                                    <span class="material-symbols-outlined text-purple-500">create_new_folder</span>
+                                    <span class="flex-1 font-medium text-charcoal">Add Case Study</span>
+                                    <span class="material-symbols-outlined text-gray-400">arrow_forward</span>
+                                </a>
+                                <a href="content.html" class="quick-action">
+                                    <span class="material-symbols-outlined text-orange-500">edit</span>
+                                    <span class="flex-1 font-medium text-charcoal">Edit Homepage</span>
+                                    <span class="material-symbols-outlined text-gray-400">arrow_forward</span>
+                                </a>
+                                <a href="media.html" class="quick-action">
+                                    <span class="material-symbols-outlined text-green-500">cloud_upload</span>
+                                    <span class="flex-1 font-medium text-charcoal">Upload Media</span>
+                                    <span class="material-symbols-outlined text-gray-400">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                            <h2 class="text-lg font-bold text-charcoal mb-4">Recent Activity</h2>
+                            <div class="space-y-4">
+                                <div class="flex gap-3">
+                                    <div
+                                        class="size-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <span class="material-symbols-outlined text-blue-600 text-sm">edit</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-charcoal"><span class="font-semibold">You</span> updated
+                                            Jisek case study</p>
+                                        <p class="text-xs text-gray-400">1 hour ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div
+                                        class="size-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <span class="material-symbols-outlined text-green-600 text-sm">add</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-charcoal"><span class="font-semibold">New booking</span>
+                                            from TechCorp</p>
+                                        <p class="text-xs text-gray-400">3 hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div
+                                        class="size-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <span class="material-symbols-outlined text-purple-600 text-sm">image</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-charcoal"><span class="font-semibold">You</span> uploaded
+                                            5 images</p>
+                                        <p class="text-xs text-gray-400">Yesterday</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
