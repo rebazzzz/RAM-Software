@@ -102,19 +102,7 @@
                     </div>
                 </div>
 
-                <!-- Engineer Profile Card -->
-                <div
-                    class="mt-4 p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 flex items-center gap-5 shadow-sm">
-                    <div class="size-16 rounded-full overflow-hidden bg-gray-100 border-2 border-primary/20">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=face"
-                            alt="David Chen - Technical Director" class="w-full h-full object-cover">
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-muted dark:text-gray-400">Consult with</p>
-                        <h5 class="text-lg font-bold text-charcoal dark:text-white">David Chen</h5>
-                        <p class="text-xs font-semibold text-primary uppercase tracking-wide">Technical Director</p>
-                    </div>
-                </div>
+
             </div>
 
             <!-- Right Column: Booking Interface -->
@@ -155,47 +143,333 @@
                     </div>
 
                     <form id="booking-form" class="space-y-6 pt-6 border-t border-gray-100 dark:border-gray-800">
-                        <h4 class="font-bold text-sm">Session Details</h4>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="form-group">
-                                <label for="fullName" class="form-label">Full Name</label>
-                                <input type="text" id="fullName" name="fullName" class="form-input"
-                                    placeholder="John Doe" required>
+                        <!-- Progress Indicator -->
+                        <div class="mb-6">
+                            <div class="flex justify-between text-xs font-medium text-muted mb-2">
+                                <span id="step-label-1" class="text-primary font-bold">Contact Info</span>
+                                <span id="step-label-2">Project Details</span>
+                                <span id="step-label-3">Additional Context</span>
                             </div>
-                            <div class="form-group">
-                                <label for="email" class="form-label">Work Email</label>
-                                <input type="email" id="email" name="email" class="form-input"
-                                    placeholder="john@company.com" required>
+                            <div class="h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div id="form-progress" class="h-full bg-primary w-1/3 transition-all duration-300">
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="website" class="form-label">Company Website</label>
-                            <input type="url" id="website" name="website" class="form-input"
-                                placeholder="https://company.com">
+                        <!-- Step 1: Contact Information -->
+                        <div id="step-1" class="form-step">
+                            <h4 class="font-bold text-lg flex items-center gap-2 mb-6">
+                                <span
+                                    class="size-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">1</span>
+                                Contact Information
+                            </h4>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="form-group">
+                                    <label for="fullName" class="form-label">Full Name <span
+                                            class="text-red-500">*</span></label>
+                                    <input type="text" id="fullName" name="fullName" class="form-input"
+                                        placeholder="John Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Work Email <span
+                                            class="text-red-500">*</span></label>
+                                    <input type="email" id="email" name="email" class="form-input"
+                                        placeholder="john@company.com" required>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                <div class="form-group">
+                                    <label for="companyName" class="form-label">Company Name <span
+                                            class="text-red-500">*</span></label>
+                                    <input type="text" id="companyName" name="companyName" class="form-input"
+                                        placeholder="Acme Inc." required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jobTitle" class="form-label">Job Title / Role</label>
+                                    <input type="text" id="jobTitle" name="jobTitle" class="form-input"
+                                        placeholder="CTO, Product Manager, etc.">
+                                </div>
+                            </div>
+
+                            <div class="form-group mt-4">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-input"
+                                    placeholder="+1 (555) 123-4567">
+                                <p class="text-xs text-muted mt-1">Optional, but helps us reach you quickly</p>
+                            </div>
+
+                            <div class="form-group mt-4">
+                                <label for="website" class="form-label">Company Website</label>
+                                <input type="url" id="website" name="website" class="form-input"
+                                    placeholder="https://company.com">
+                            </div>
+
+                            <div class="flex justify-end mt-8">
+                                <button type="button" id="next-step-1"
+                                    class="bg-primary hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg shadow-primary/20 flex items-center gap-2">
+                                    <span>Next Step</span>
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+                                </button>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="project" class="form-label">Briefly describe your project goals</label>
-                            <textarea id="project" name="project" class="form-textarea"
-                                placeholder="Scaling our backend to support 100k concurrent users..."
-                                rows="3"></textarea>
+                        <!-- Step 2: Project Details -->
+                        <div id="step-2" class="form-step hidden">
+                            <div class="flex items-center gap-2 mb-6">
+                                <button type="button" id="prev-step-2"
+                                    class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                                    <span class="material-symbols-outlined text-muted">arrow_back</span>
+                                </button>
+                                <h4 class="font-bold text-lg flex items-center gap-2">
+                                    <span
+                                        class="size-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">2</span>
+                                    Project Details
+                                </h4>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Service Type <span class="text-red-500">*</span></label>
+                                <div class="grid grid-cols-2 gap-2 mt-2">
+                                    <label
+                                        class="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" name="serviceType" value="web-development"
+                                            class="rounded text-primary focus:ring-primary">
+                                        <span class="text-sm">Web Development</span>
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" name="serviceType" value="mobile-app"
+                                            class="rounded text-primary focus:ring-primary">
+                                        <span class="text-sm">Mobile App</span>
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" name="serviceType" value="cloud-infrastructure"
+                                            class="rounded text-primary focus:ring-primary">
+                                        <span class="text-sm">Cloud Infrastructure</span>
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" name="serviceType" value="ai-ml"
+                                            class="rounded text-primary focus:ring-primary">
+                                        <span class="text-sm">AI/ML Integration</span>
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" name="serviceType" value="api-development"
+                                            class="rounded text-primary focus:ring-primary">
+                                        <span class="text-sm">API Development</span>
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" name="serviceType" value="devops"
+                                            class="rounded text-primary focus:ring-primary">
+                                        <span class="text-sm">DevOps</span>
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" name="serviceType" value="consulting"
+                                            class="rounded text-primary focus:ring-primary">
+                                        <span class="text-sm">Consulting</span>
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" name="serviceType" value="other"
+                                            class="rounded text-primary focus:ring-primary">
+                                        <span class="text-sm">Other</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                <div class="form-group">
+                                    <label for="budget" class="form-label">Budget Range</label>
+                                    <select id="budget" name="budget" class="form-input">
+                                        <option value="">Select budget range</option>
+                                        <option value="10k-25k">$10,000 - $25,000</option>
+                                        <option value="25k-50k">$25,000 - $50,000</option>
+                                        <option value="50k-100k">$50,000 - $100,000</option>
+                                        <option value="100k-plus">$100,000+</option>
+                                        <option value="enterprise">Enterprise (Custom)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="timeline" class="form-label">Expected Timeline</label>
+                                    <select id="timeline" name="timeline" class="form-input">
+                                        <option value="">Select timeline</option>
+                                        <option value="asap">ASAP (Rush project)</option>
+                                        <option value="1-3-months">1-3 months</option>
+                                        <option value="3-6-months">3-6 months</option>
+                                        <option value="6-plus-months">6+ months</option>
+                                        <option value="flexible">Flexible / Not sure</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                <div class="form-group">
+                                    <label for="teamSize" class="form-label">Team Size</label>
+                                    <select id="teamSize" name="teamSize" class="form-input">
+                                        <option value="">Select team size</option>
+                                        <option value="solo">Just me</option>
+                                        <option value="small">2-5 people</option>
+                                        <option value="medium">6-10 people</option>
+                                        <option value="large">10+ people</option>
+                                        <option value="enterprise">Enterprise</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="techStack" class="form-label">Current Tech Stack</label>
+                                    <input type="text" id="techStack" name="techStack" class="form-input"
+                                        placeholder="React, Node.js, AWS, etc.">
+                                </div>
+                            </div>
+
+                            <div class="form-group mt-4">
+                                <label for="project" class="form-label">Project Description <span
+                                        class="text-red-500">*</span></label>
+                                <textarea id="project" name="project" class="form-textarea"
+                                    placeholder="Describe your project goals, challenges, and what success looks like. Be as detailed as possible..."
+                                    rows="4" required></textarea>
+                                <div class="flex justify-between mt-1">
+                                    <p class="text-xs text-muted">Minimum 50 characters recommended</p>
+                                    <span id="char-count" class="text-xs text-muted">0 chars</span>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-between mt-8">
+                                <button type="button" id="prev-step-2-btn"
+                                    class="border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 text-charcoal dark:text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center gap-2">
+                                    <span class="material-symbols-outlined">arrow_back</span>
+                                    <span>Back</span>
+                                </button>
+                                <button type="button" id="next-step-2"
+                                    class="bg-primary hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg shadow-primary/20 flex items-center gap-2">
+                                    <span>Next Step</span>
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+                                </button>
+                            </div>
                         </div>
 
-                        <input type="hidden" id="selected-date" name="selectedDate">
+                        <!-- Step 3: Additional Context -->
+                        <div id="step-3" class="form-step hidden">
+                            <div class="flex items-center gap-2 mb-6">
+                                <button type="button" id="prev-step-3"
+                                    class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                                    <span class="material-symbols-outlined text-muted">arrow_back</span>
+                                </button>
+                                <h4 class="font-bold text-lg flex items-center gap-2">
+                                    <span
+                                        class="size-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">3</span>
+                                    Additional Context
+                                </h4>
+                            </div>
 
-                        <button type="submit"
-                            class="w-full bg-primary hover:bg-blue-600 text-white font-bold py-4 rounded-lg transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
-                            <span>Confirm Booking</span>
-                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
-                        </button>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="form-group">
+                                    <label for="referral" class="form-label">How did you hear about us?</label>
+                                    <select id="referral" name="referral" class="form-input">
+                                        <option value="">Select source</option>
+                                        <option value="google">Google Search</option>
+                                        <option value="linkedin">LinkedIn</option>
+                                        <option value="referral">Referral / Word of mouth</option>
+                                        <option value="previous-client">Previous Client</option>
+                                        <option value="conference">Conference / Event</option>
+                                        <option value="social-media">Social Media</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactTime" class="form-label">Preferred Follow-up Time</label>
+                                    <select id="contactTime" name="contactTime" class="form-input">
+                                        <option value="">Select preferred time</option>
+                                        <option value="morning">Morning (9AM - 12PM)</option>
+                                        <option value="afternoon">Afternoon (12PM - 5PM)</option>
+                                        <option value="evening">Evening (5PM - 8PM)</option>
+                                        <option value="anytime">Anytime</option>
+                                    </select>
+                                    <p class="text-xs text-muted mt-1">For any additional calls before/after your
+                                        scheduled strategy session</p>
+                                </div>
 
-                        <p class="text-center text-[11px] text-muted">
-                            By booking, you agree to our <a href="#" class="underline hover:text-primary">Terms</a> and
-                            <a href="#" class="underline hover:text-primary">Privacy Policy</a>.
-                        </p>
+                            </div>
+
+                            <div class="form-group mt-4">
+                                <label class="form-label">Response Priority</label>
+                                <p class="text-xs text-muted mb-2">How quickly do you need us to respond to your
+                                    inquiry?</p>
+                                <div class="flex gap-4 mt-2 flex-wrap">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="urgency" value="low"
+                                            class="text-primary focus:ring-primary">
+                                        <span class="text-sm">Standard (24-48h)</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="urgency" value="medium"
+                                            class="text-primary focus:ring-primary" checked>
+                                        <span class="text-sm">Priority (Same day)</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="urgency" value="high"
+                                            class="text-primary focus:ring-primary">
+                                        <span class="text-sm">Urgent (Within 4h)</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="urgency" value="critical"
+                                            class="text-primary focus:ring-primary">
+                                        <span class="text-sm">Critical (ASAP)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group mt-4">
+                                <label for="attachments" class="form-label">Attachments (Optional)</label>
+                                <div class="relative">
+                                    <input type="file" id="attachments" name="attachments" class="hidden" multiple
+                                        accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.ppt,.pptx">
+                                    <label for="attachments"
+                                        class="flex items-center justify-center gap-2 w-full p-4 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:border-primary transition-colors">
+                                        <span class="material-symbols-outlined text-muted">cloud_upload</span>
+                                        <span class="text-sm text-muted">Click to upload files (PDF, DOC, PNG, JPG - Max
+                                            10MB)</span>
+                                    </label>
+                                </div>
+                                <div id="file-list" class="mt-2 space-y-1"></div>
+                            </div>
+
+                            <!-- Honeypot field for spam protection -->
+                            <div class="form-group hidden" aria-hidden="true">
+                                <input type="text" id="website-url" name="website-url" tabindex="-1" autocomplete="off">
+                            </div>
+
+                            <input type="hidden" id="selected-date" name="selectedDate">
+
+                            <div class="flex justify-between mt-8">
+                                <button type="button" id="prev-step-3-btn"
+                                    class="border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 text-charcoal dark:text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center gap-2">
+                                    <span class="material-symbols-outlined">arrow_back</span>
+                                    <span>Back</span>
+                                </button>
+                                <button type="submit" id="submit-btn"
+                                    class="bg-primary hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg shadow-primary/20 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                                    <span>Submit Project Inquiry</span>
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+                                </button>
+                            </div>
+
+                            <p class="text-center text-[11px] text-muted mt-4">
+                                By submitting, you agree to our <a href="#" class="underline hover:text-primary">Terms
+                                    of Service</a> and
+                                <a href="#" class="underline hover:text-primary">Privacy Policy</a>. We'll never share
+                                your information with third parties.
+                            </p>
+                        </div>
                     </form>
+
+
                 </div>
             </div>
         </div>
@@ -232,6 +506,16 @@
     <!-- Scripts -->
     <script src="js/main.js"></script>
     <script src="js/pages/book-call.js"></script>
+
+    <!-- Form Auto-save Notification -->
+    <div id="auto-save-indicator"
+        class="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+        <span class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-sm">check_circle</span>
+            Draft saved
+        </span>
+    </div>
 </body>
+
 
 </html>

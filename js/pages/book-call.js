@@ -9,11 +9,21 @@ const BookingPage = {
   currentDate: new Date(),
   selectedDate: null,
   unavailableDates: [], // Dates that are unavailable
+  attachedFiles: [], // Store uploaded files
+  autoSaveInterval: null,
+  currentStep: 1,
+  totalSteps: 3,
 
   init() {
     this.initCalendar();
     this.initForm();
+    this.initStepNavigation();
     this.loadUnavailableDates();
+    this.initCharacterCounter();
+    this.initFileUpload();
+    this.initAutoSave();
+    this.loadSavedFormData();
+    this.updateProgressIndicator();
   },
 
   /**
@@ -269,14 +279,152 @@ const BookingPage = {
   },
 
   /**
+   * Initialize step navigation
+   */
+  initStepNavigation() {
+    // Next buttons
+    document.getElementById("next-step-1")?.addEventListener("click", () => {
+      if (this.validateStep(1)) {
+        this.goToStep(2);
+      }
+    });
+
+    document.getElementById("next-step-2")?.addEventListener("click", () => {
+      if (this.validateStep(2)) {
+        this.goToStep(3);
+      }
+    });
+
+    // Previous buttons
+    document
+      .getElementById("prev-step-2")
+      ?.addEventListener("click", () => this.goToStep(1));
+    document
+      .getElementById("prev-step-2-btn")
+      ?.addEventListener("click", () => this.goToStep(1));
+    document
+      .getElementById("prev-step-3")
+      ?.addEventListener("click", () => this.goToStep(2));
+    document
+      .getElementById("prev-step-3-btn")
+      ?.addEventListener("click", () => this.goToStep(2));
+  },
+
+  /**
+   * Navigate to a specific step
+   */
+  goToStep(step) {
+    // Hide all steps
+    document.querySelectorAll(".form-step").forEach((el) => {
+      el.classList.add("hidden");
+    });
+
+    // Show target step
+    const targetStep = document.getElementById(`step-${step}`);
+    if (targetStep) {
+      targetStep.classList.remove("hidden");
+      targetStep.classList.add("animate-fade-in");
+    }
+
+    // Update step labels
+    for (let i = 1; i <= this.totalSteps; i++) {
+      const label = document.getElementById(`step-label-${i}`);
+      if (label) {
+        if (i === step) {
+          label.classList.add("text-primary", "font-bold");
+          label.classList.remove("text-muted");
+        } else if (i < step) {
+          label.classList.add("text-green-500");
+          label.classList.remove("text-primary", "font-bold", "text-muted");
+        } else {
+          label.classList.add("text-muted");
+          label.classList.remove("text-primary", "font-bold", "text-green-500");
+        }
+      }
+    }
+
+    // Update progress bar
+    const progress = (step / this.totalSteps) * 100;
+    const progressBar = document.getElementById("form-progress");
+    if (progressBar) {
+      progressBar.style.width = `${progress}%`;
+    }
+
+    this.currentStep = step;
+    this.saveFormData(); // Save progress when changing steps
+  },
+
+  /**
+   * Validate a specific step
+   */
+  validateStep(step) {
+    const stepElement = document.getElementById(`step-${step}`);
+    if (!stepElement) return false;
+
+    let isValid = true;
+    const requiredFields = stepElement.querySelectorAll(
+      "input[required], textarea[required]",
+    );
+
+    requiredFields.forEach((field) => {
+      if (!this.validateField(field)) {
+        isValid = false;
+      }
+    });
+
+    // Special validation for step 2 (service type)
+    if (step === 2) {
+      const serviceTypes = stepElement.querySelectorAll(
+        'input[name="serviceType"]:checked',
+      );
+      if (serviceTypes.length === 0) {
+        RAMSoftware.Utils.showToast(
+          "Please select at least one service type.",
+          "error",
+        );
+        isValid = false;
+      }
+    }
+
+    if (!isValid) {
+      RAMSoftware.Utils.showToast(
+        "Please fill in all required fields before continuing.",
+        "error",
+      );
+    }
+
+    return isValid;
+  },
+
+  /**
    * Initialize form handling
    */
   initForm() {
     const form = document.getElementById("booking-form");
     if (!form) return;
 
+    // Real-time validation on input
+    form.querySelectorAll("input, textarea, select").forEach((field) => {
+      field.addEventListener("input", () => {
+        this.validateField(field);
+      });
+      field.addEventListener("blur", () => this.validateField(field));
+    });
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      // Check honeypot (spam protection)
+      const honeypot = document.getElementById("website-url");
+      if (honeypot && honeypot.value) {
+        console.log("Spam detected");
+        return;
+      }
+
+      // Validate final step
+      if (!this.validateStep(3)) {
+        return;
+      }
 
       // Validate date selection
       if (!this.selectedDate) {
@@ -287,7 +435,7 @@ const BookingPage = {
         return;
       }
 
-      const submitBtn = form.querySelector('[type="submit"]');
+      const submitBtn = document.getElementById("submit-btn");
       const originalText = submitBtn.innerHTML;
 
       // Show loading state
@@ -296,32 +444,32 @@ const BookingPage = {
         '<span class="animate-spin inline-block mr-2">⟳</span> Processing...';
 
       try {
-        // Collect form data
-        const formData = {
-          name: document.getElementById("fullName").value,
-          email: document.getElementById("email").value,
-          website: document.getElementById("website").value,
-          project: document.getElementById("project").value,
-          date: document.getElementById("selected-date").value,
-        };
+        // Collect comprehensive form data
+        const formData = this.collectFormData();
 
         // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        // Clear saved form data
+        localStorage.removeItem("bookingFormData");
 
         // Show success message
         RAMSoftware.Utils.showToast(
-          "Your strategy call has been booked! Check your email for confirmation.",
+          "Your project inquiry has been submitted! We'll be in touch within 24 hours.",
           "success",
         );
 
-        // Reset form
+        // Reset form and go back to step 1
         form.reset();
         this.selectedDate = null;
+        this.attachedFiles = [];
+        this.updateFileList();
         document.querySelectorAll(".calendar-day.selected").forEach((el) => {
           el.classList.remove("selected");
         });
         const timeSlots = document.getElementById("time-slots");
         if (timeSlots) timeSlots.remove();
+        this.goToStep(1);
 
         // In production, you would send this to your backend
         console.log("Booking data:", formData);
@@ -336,24 +484,345 @@ const BookingPage = {
         submitBtn.innerHTML = originalText;
       }
     });
+  },
 
-    // Real-time validation
-    const emailInput = document.getElementById("email");
-    if (emailInput) {
-      emailInput.addEventListener("blur", () => {
-        if (
-          emailInput.value &&
-          !RAMSoftware.Utils.isValidEmail(emailInput.value)
-        ) {
-          emailInput.classList.add("border-red-500");
-          RAMSoftware.Utils.showToast(
-            "Please enter a valid email address",
-            "error",
-          );
-        } else {
-          emailInput.classList.remove("border-red-500");
+  /**
+   * Validate a single field
+   */
+  validateField(field) {
+    const value = field.value.trim();
+    let isValid = true;
+
+    // Remove previous error state
+    field.classList.remove("border-red-500");
+
+    // Required field validation
+    if (field.hasAttribute("required") && !value) {
+      isValid = false;
+    }
+
+    // Email validation
+    if (field.type === "email" && value) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) {
+        isValid = false;
+      }
+    }
+
+    // URL validation
+    if (field.type === "url" && value) {
+      try {
+        new URL(value);
+      } catch {
+        isValid = false;
+      }
+    }
+
+    // Phone validation (basic)
+    if (field.type === "tel" && value) {
+      const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+      if (!phoneRegex.test(value) || value.length < 10) {
+        isValid = false;
+      }
+    }
+
+    if (!isValid) {
+      field.classList.add("border-red-500");
+    }
+
+    return isValid;
+  },
+
+  /**
+   * Validate entire form
+   */
+  validateForm() {
+    const form = document.getElementById("booking-form");
+    let isValid = true;
+
+    form
+      .querySelectorAll("input[required], textarea[required]")
+      .forEach((field) => {
+        if (!this.validateField(field)) {
+          isValid = false;
         }
       });
+
+    return isValid;
+  },
+
+  /**
+   * Collect all form data
+   */
+  collectFormData() {
+    const form = document.getElementById("booking-form");
+    const serviceTypes = Array.from(
+      form.querySelectorAll('input[name="serviceType"]:checked'),
+    ).map((cb) => cb.value);
+
+    return {
+      // Contact Information
+      fullName: document.getElementById("fullName").value,
+      email: document.getElementById("email").value,
+      companyName: document.getElementById("companyName").value,
+      jobTitle: document.getElementById("jobTitle").value,
+      phone: document.getElementById("phone").value,
+      website: document.getElementById("website").value,
+
+      // Project Details
+      serviceTypes: serviceTypes,
+      budget: document.getElementById("budget").value,
+      timeline: document.getElementById("timeline").value,
+      teamSize: document.getElementById("teamSize").value,
+      techStack: document.getElementById("techStack").value,
+      projectDescription: document.getElementById("project").value,
+
+      // Additional Context
+      referralSource: document.getElementById("referral").value,
+      contactTime: document.getElementById("contactTime").value,
+      urgencyLevel:
+        form.querySelector('input[name="urgency"]:checked')?.value || "medium",
+      attachments: this.attachedFiles.map((f) => f.name),
+
+      // Meeting Details
+      selectedDate: document.getElementById("selected-date").value,
+      submittedAt: new Date().toISOString(),
+    };
+  },
+
+  /**
+   * Initialize character counter for project description
+   */
+  initCharacterCounter() {
+    const textarea = document.getElementById("project");
+    const counter = document.getElementById("char-count");
+    if (!textarea || !counter) return;
+
+    textarea.addEventListener("input", () => {
+      const length = textarea.value.length;
+      counter.textContent = `${length} chars`;
+
+      if (length < 50) {
+        counter.classList.add("text-red-500");
+        counter.classList.remove("text-muted", "text-green-500");
+      } else if (length >= 50 && length < 200) {
+        counter.classList.add("text-green-500");
+        counter.classList.remove("text-muted", "text-red-500");
+      } else {
+        counter.classList.add("text-muted");
+        counter.classList.remove("text-red-500", "text-green-500");
+      }
+    });
+  },
+
+  /**
+   * Initialize file upload handling
+   */
+  initFileUpload() {
+    const fileInput = document.getElementById("attachments");
+    if (!fileInput) return;
+
+    fileInput.addEventListener("change", (e) => {
+      const files = Array.from(e.target.files);
+      const maxSize = 10 * 1024 * 1024; // 10MB
+      const allowedTypes = [
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "image/png",
+        "image/jpeg",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      ];
+
+      files.forEach((file) => {
+        // Check file size
+        if (file.size > maxSize) {
+          RAMSoftware.Utils.showToast(
+            `${file.name} exceeds 10MB limit.`,
+            "error",
+          );
+          return;
+        }
+
+        // Check file type
+        if (!allowedTypes.includes(file.type)) {
+          RAMSoftware.Utils.showToast(
+            `${file.name} is not a supported file type.`,
+            "error",
+          );
+          return;
+        }
+
+        // Add to attached files
+        this.attachedFiles.push(file);
+      });
+
+      this.updateFileList();
+
+      // Reset input to allow selecting same files again
+      fileInput.value = "";
+    });
+  },
+
+  /**
+   * Update file list display
+   */
+  updateFileList() {
+    const fileList = document.getElementById("file-list");
+    if (!fileList) return;
+
+    if (this.attachedFiles.length === 0) {
+      fileList.innerHTML = "";
+      return;
+    }
+
+    fileList.innerHTML = this.attachedFiles
+      .map(
+        (file, index) => `
+        <div class="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm">
+          <div class="flex items-center gap-2 overflow-hidden">
+            <span class="material-symbols-outlined text-primary text-base">description</span>
+            <span class="truncate">${file.name}</span>
+            <span class="text-muted text-xs">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+          </div>
+          <button type="button" onclick="BookingPage.removeFile(${index})" class="text-red-500 hover:text-red-700 p-1">
+            <span class="material-symbols-outlined text-base">close</span>
+          </button>
+        </div>
+      `,
+      )
+      .join("");
+  },
+
+  /**
+   * Remove a file from the list
+   */
+  removeFile(index) {
+    this.attachedFiles.splice(index, 1);
+    this.updateFileList();
+  },
+
+  /**
+   * Initialize auto-save functionality
+   */
+  initAutoSave() {
+    // Auto-save every 30 seconds
+    this.autoSaveInterval = setInterval(() => {
+      this.saveFormData();
+    }, 30000);
+
+    // Save on page unload
+    window.addEventListener("beforeunload", () => {
+      this.saveFormData();
+    });
+  },
+
+  /**
+   * Save form data to localStorage
+   */
+  saveFormData() {
+    const form = document.getElementById("booking-form");
+    if (!form) return;
+
+    const formData = {};
+    form.querySelectorAll("input, textarea, select").forEach((field) => {
+      if (field.type === "checkbox") {
+        if (field.name) {
+          if (!formData[field.name]) formData[field.name] = [];
+          if (field.checked) formData[field.name].push(field.value);
+        }
+      } else if (field.type === "radio") {
+        if (field.checked) {
+          formData[field.name] = field.value;
+        }
+      } else if (field.type !== "file" && field.id !== "website-url") {
+        formData[field.id || field.name] = field.value;
+      }
+    });
+
+    localStorage.setItem("bookingFormData", JSON.stringify(formData));
+
+    // Show auto-save indicator
+    const indicator = document.getElementById("auto-save-indicator");
+    if (indicator) {
+      indicator.classList.remove("opacity-0");
+      setTimeout(() => {
+        indicator.classList.add("opacity-0");
+      }, 2000);
+    }
+  },
+
+  /**
+   * Load saved form data from localStorage
+   */
+  loadSavedFormData() {
+    const saved = localStorage.getItem("bookingFormData");
+    if (!saved) return;
+
+    try {
+      const formData = JSON.parse(saved);
+      const form = document.getElementById("booking-form");
+
+      Object.entries(formData).forEach(([key, value]) => {
+        const field =
+          document.getElementById(key) || form.querySelector(`[name="${key}"]`);
+        if (!field) return;
+
+        if (Array.isArray(value)) {
+          // Handle checkboxes
+          value.forEach((val) => {
+            const checkbox = form.querySelector(
+              `[name="${key}"][value="${val}"]`,
+            );
+            if (checkbox) checkbox.checked = true;
+          });
+        } else if (field.type === "radio") {
+          const radio = form.querySelector(`[name="${key}"][value="${value}"]`);
+          if (radio) radio.checked = true;
+        } else {
+          field.value = value;
+        }
+      });
+
+      // Update character counter if project description exists
+      const projectDesc = document.getElementById("project");
+      if (projectDesc && projectDesc.value) {
+        projectDesc.dispatchEvent(new Event("input"));
+      }
+
+      this.updateProgressIndicator();
+    } catch (error) {
+      console.error("Error loading saved form data:", error);
+    }
+  },
+
+  /**
+   * Update progress indicator based on current step
+   */
+  updateProgressIndicator() {
+    // Progress is now based on current step in multi-step form
+    const progress = (this.currentStep / this.totalSteps) * 100;
+    const progressBar = document.getElementById("form-progress");
+    if (progressBar) {
+      progressBar.style.width = `${progress}%`;
+    }
+
+    // Update step labels
+    for (let i = 1; i <= this.totalSteps; i++) {
+      const label = document.getElementById(`step-label-${i}`);
+      if (label) {
+        if (i === this.currentStep) {
+          label.classList.add("text-primary", "font-bold");
+          label.classList.remove("text-muted", "text-green-500");
+        } else if (i < this.currentStep) {
+          label.classList.add("text-green-500");
+          label.classList.remove("text-primary", "font-bold", "text-muted");
+        } else {
+          label.classList.add("text-muted");
+          label.classList.remove("text-primary", "font-bold", "text-green-500");
+        }
+      }
     }
   },
 };
