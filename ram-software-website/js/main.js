@@ -30,8 +30,6 @@ const ComponentLoader = {
 
     headerContainer.innerHTML = `
       <header class="border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-[#101722]/80 backdrop-blur-md sticky top-0 z-50">
-
-
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <a href="index.html" class="logo">
             <div class="logo-icon">
@@ -42,7 +40,7 @@ const ComponentLoader = {
           
           <nav class="hidden md:flex items-center gap-8 text-sm font-medium nav-desktop">
             <a href="services.html" class="nav-link ${currentPage === "services.html" ? "text-primary" : ""}">Services</a>
-            <a href="case-study.html" class="nav-link ${currentPage === "case-study.html" ? "text-primary" : ""}">Case Studies</a>
+            <a href="work.html" class="nav-link ${currentPage === "work.html" ? "text-primary" : ""}">Case Studies</a>
             <a href="index.html#vision" class="nav-link">About</a>
             <a href="index.html#contact" class="nav-link">Contact</a>
             <a href="book-call.html" class="btn btn-primary">Book a Call</a>
@@ -57,7 +55,7 @@ const ComponentLoader = {
         <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-[#101722]">
           <div class="px-6 py-4 space-y-4">
             <a href="services.html" class="block nav-link ${currentPage === "services.html" ? "text-primary" : ""}">Services</a>
-            <a href="case-study.html" class="block nav-link ${currentPage === "case-study.html" ? "text-primary" : ""}">Case Studies</a>
+            <a href="work.html" class="block nav-link ${currentPage === "work.html" ? "text-primary" : ""}">Case Studies</a>
             <a href="index.html#vision" class="block nav-link">About</a>
             <a href="index.html#contact" class="block nav-link">Contact</a>
             <a href="book-call.html" class="btn btn-primary w-full">Book a Call</a>
@@ -106,7 +104,7 @@ const ComponentLoader = {
               <ul class="space-y-4 text-slate-500 text-sm">
                 <li><a href="index.html#vision" class="hover:text-primary transition-colors">About Us</a></li>
                 <li><a href="services.html" class="hover:text-primary transition-colors">Services</a></li>
-                <li><a href="case-study.html" class="hover:text-primary transition-colors">Work</a></li>
+                <li><a href="work.html" class="hover:text-primary transition-colors">Work</a></li>
                 <li><a href="index.html#vision" class="hover:text-primary transition-colors">Vision</a></li>
               </ul>
             </div>
