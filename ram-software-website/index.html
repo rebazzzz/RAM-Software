@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAM Software | High-Performance Digital Systems</title>
+    <meta name="description"
+        content="High-performance software engineered for the Swedish and international markets. We bridge the gap between complex engineering and elegant user experiences.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3c83f6",
+                        "background-light": "#F9FAFB",
+                        "background-dark": "#101722",
+                        charcoal: "#111827",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body class="font-display selection:bg-primary/20 selection:text-primary">
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative pt-40 pb-24 px-6 hero-gradient overflow-hidden">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+                <div class="flex flex-col gap-8">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 w-fit">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                        </span>
+                        <span class="text-xs font-bold text-primary tracking-wider uppercase">Engineering for
+                            Scale</span>
+                    </div>
+
+                    <h1 class="text-6xl md:text-7xl font-black text-charcoal leading-[1.1] tracking-tight">
+                        We Build <span class="text-primary">Scalable</span> Digital Systems.
+                    </h1>
+
+                    <p class="text-xl text-slate-600 max-w-xl leading-relaxed">
+                        High-performance software engineered for the Swedish and international markets. We bridge the
+                        gap between complex engineering and elegant user experiences.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="case-study.html" class="btn btn-lg btn-primary">
+                            View Our Work
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </a>
+                        <a href="book-call.html" class="btn btn-lg btn-secondary">
+                            Book Strategy Call
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <div
+                        class="absolute -inset-4 bg-primary/5 rounded-[2rem] blur-2xl group-hover:bg-primary/10 transition-colors">
+                    </div>
+                    <div
+                        class="relative bg-white border border-slate-200 shadow-2xl rounded-2xl overflow-hidden aspect-[4/3]">
+                        <div class="bg-slate-50 border-b border-slate-200 px-4 py-3 flex items-center gap-2">
+                            <div class="flex gap-1.5">
+                                <div class="size-3 rounded-full bg-slate-200"></div>
+                                <div class="size-3 rounded-full bg-slate-200"></div>
+                                <div class="size-3 rounded-full bg-slate-200"></div>
+                            </div>
+                            <div class="mx-auto bg-slate-200 h-2 w-32 rounded-full opacity-50"></div>
+                        </div>
+                        <div class="p-6 grid grid-cols-6 gap-4 h-full">
+                            <div class="col-span-2 space-y-4">
+                                <div class="h-8 bg-slate-100 rounded-lg w-full"></div>
+                                <div class="h-32 bg-primary/5 border border-primary/10 rounded-lg w-full"></div>
+                                <div class="space-y-2">
+                                    <div class="h-3 bg-slate-100 rounded-full w-3/4"></div>
+                                    <div class="h-3 bg-slate-100 rounded-full w-1/2"></div>
+                                </div>
+                            </div>
+                            <div class="col-span-4 space-y-4">
+                                <div
+                                    class="h-48 bg-slate-50 border border-slate-100 rounded-xl w-full flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-slate-300 text-4xl">monitoring</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="h-20 bg-slate-50 border border-slate-100 rounded-xl"></div>
+                                    <div class="h-20 bg-slate-50 border border-slate-100 rounded-xl"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Grid -->
+        <section class="py-32 px-6 bg-white border-y border-slate-100" id="services">
+            <div class="max-w-7xl mx-auto">
+                <div class="section-header">
+                    <h2 class="section-label">Capabilities</h2>
+                    <h3 class="section-title">Engineering Excellence</h3>
+                    <p class="text-lg text-slate-500 max-w-2xl mt-4">Specialized technical solutions for high-growth
+                        enterprises that demand reliability and speed.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Service 1 -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined text-3xl">cloud_done</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-charcoal mb-4">Custom Web Platforms</h4>
+                        <p class="text-slate-600 leading-relaxed mb-6">High-availability architecture built for global
+                            scale and reliability. We focus on latency, security, and developer experience.</p>
+                        <ul class="space-y-3 text-sm text-slate-500">
+                            <li class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                React/Next.js Core
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Microservices Architecture
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Real-time Data Sync
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined text-3xl">neurology</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-charcoal mb-4">AI & Automation</h4>
+                        <p class="text-slate-600 leading-relaxed mb-6">Integrating LLMs and workflow optimization into
+                            existing systems. We turn artificial intelligence into tangible business ROI.</p>
+                        <ul class="space-y-3 text-sm text-slate-500">
+                            <li class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Custom LLM Fine-tuning
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Intelligent Workflow Design
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Predictive Analytics
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined text-3xl">rocket_launch</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-charcoal mb-4">Product Development</h4>
+                        <p class="text-slate-600 leading-relaxed mb-6">From initial MVP to global scale with a focus on
+                            performance. We help you build products that users love and investors value.</p>
+                        <ul class="space-y-3 text-sm text-slate-500">
+                            <li class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Rapid Prototyping
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                SaaS Multi-tenancy
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Scalable Cloud Infra
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Selected Work -->
+        <section class="py-32 px-6" id="work">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                    <div class="space-y-4">
+                        <h2 class="section-label">Case Studies</h2>
+                        <h3 class="section-title">Selected Work</h3>
+                    </div>
+                    <a href="case-study.html"
+                        class="text-charcoal font-bold flex items-center gap-2 hover:text-primary transition-colors group">
+                        Browse All Projects
+                        <span
+                            class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+                    </a>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Case Study 1 -->
+                    <a href="case-study.html" class="case-study-card group">
+                        <div class="case-study-image">
+                            <div
+                                class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+                                <span class="bg-white text-charcoal px-6 py-2 rounded-full font-bold shadow-lg">View
+                                    Case Study</span>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+                                alt="Data analytics dashboard with dark theme" loading="lazy">
+                        </div>
+                        <div class="case-study-tag">
+                            <span>Fintech</span>
+                            <span>2023</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-charcoal mb-2 group-hover:text-primary transition-colors">
+                            NeoBank Infrastructure</h4>
+                        <p class="text-slate-500 text-sm line-clamp-2">Re-architected the core payment processing
+                            engine, achieving a 400% increase in throughput during peak hours.</p>
+                    </a>
+
+                    <!-- Case Study 2 -->
+                    <a href="case-study.html" class="case-study-card group">
+                        <div class="case-study-image">
+                            <div
+                                class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+                                <span class="bg-white text-charcoal px-6 py-2 rounded-full font-bold shadow-lg">View
+                                    Case Study</span>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
+                                alt="Modern SaaS platform interface" loading="lazy">
+                        </div>
+                        <div class="case-study-tag">
+                            <span>AI SaaS</span>
+                            <span>2024</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-charcoal mb-2 group-hover:text-primary transition-colors">
+                            Lumino AI Core</h4>
+                        <p class="text-slate-500 text-sm line-clamp-2">Integration of semantic search and automated
+                            document processing for a leading Nordic legal firm.</p>
+                    </a>
+
+                    <!-- Case Study 3 -->
+                    <a href="case-study.html" class="case-study-card group">
+                        <div class="case-study-image">
+                            <div
+                                class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+                                <span class="bg-white text-charcoal px-6 py-2 rounded-full font-bold shadow-lg">View
+                                    Case Study</span>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop"
+                                alt="Supply chain logistics tracking" loading="lazy">
+                        </div>
+                        <div class="case-study-tag">
+                            <span>Enterprise</span>
+                            <span>2023</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-charcoal mb-2 group-hover:text-primary transition-colors">
+                            SupplyChain Pro</h4>
+                        <p class="text-slate-500 text-sm line-clamp-2">Real-time logistics tracking system for
+                            international freight, reducing operational overhead by 30%.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why RAM (Bento Section) -->
+        <section class="py-32 px-6 bg-slate-50">
+            <div class="max-w-7xl mx-auto">
+                <div class="bento-grid grid-cols-1 lg:grid-cols-12">
+                    <div
+                        class="bento-item bento-large lg:col-span-8 bg-white border border-slate-200 flex flex-col justify-between group">
+                        <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <span class="material-symbols-outlined text-[12rem]">architecture</span>
+                        </div>
+                        <div class="relative z-10">
+                            <h3 class="text-4xl font-black text-charcoal mb-6">Performance-First Architecture</h3>
+                            <p class="text-xl text-slate-500 max-w-xl leading-relaxed">We don't just build features; we
+                                engineer systems. Every line of code is written with scalability, security, and
+                                long-term maintainability in mind.</p>
+                        </div>
+                        <div class="mt-12 flex gap-8">
+                            <div>
+                                <div class="stat-value">99.99%</div>
+                                <div class="stat-label">Uptime Target</div>
+                            </div>
+                            <div>
+                                <div class="stat-value">
+                                    <100ms< /div>
+                                        <div class="stat-label">Avg Latency</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bento-item lg:col-span-4 card-dark">
+                            <span class="material-symbols-outlined text-primary text-5xl mb-6">security</span>
+                            <h3 class="text-3xl font-bold mb-4">Enterprise Grade</h3>
+                            <p class="text-slate-400 leading-relaxed">Bank-level security standards, GDPR compliance,
+                                and rigorous automated testing protocols for every deployment.</p>
+                        </div>
+
+                        <div class="bento-item lg:col-span-4 card-primary">
+                            <span class="material-symbols-outlined text-white text-5xl mb-6">speed</span>
+                            <h3 class="text-3xl font-bold mb-4">Rapid Velocity</h3>
+                            <p class="text-white/80 leading-relaxed">We ship fast without breaking things. Our CI/CD
+                                pipelines ensure constant iteration and zero-downtime releases.</p>
+                        </div>
+
+                        <div
+                            class="bento-item lg:col-span-8 bg-white border border-slate-200 flex flex-col justify-center group">
+                            <div class="flex items-center gap-12 relative z-10">
+                                <div class="hidden sm:block">
+                                    <div
+                                        class="size-20 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-300">
+                                        <span class="material-symbols-outlined text-4xl">language</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-3xl font-bold text-charcoal mb-4">Stockholm Roots, Global Reach</h3>
+                                    <p class="text-slate-500 leading-relaxed">Based in Sweden, working with industry
+                                        leaders across Europe and the US. High-end engineering meets Nordic design
+                                        principles.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <!-- Vision Section -->
+        <section class="py-32 px-6" id="vision">
+            <div class="max-w-4xl mx-auto text-center space-y-12">
+                <h2 class="section-label">Our Vision</h2>
+                <h3 class="text-5xl md:text-6xl font-black text-charcoal leading-tight">The Dual Path Synergy.</h3>
+                <p class="text-2xl text-slate-500 leading-relaxed">
+                    At RAM Software, we believe in a hybrid future. We split our focus between high-impact client
+                    engineering and developing our own internal SaaS products. This dual approach keeps our skills sharp
+                    at the cutting edge and ensures we are always building for real-world user needs.
+                </p>
+                <div class="pt-8 flex justify-center">
+                    <div class="flex -space-x-4">
+                        <div class="size-16 rounded-full border-4 border-white bg-slate-200 bg-cover bg-center"
+                            style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face')">
+                        </div>
+                        <div class="size-16 rounded-full border-4 border-white bg-slate-200 bg-cover bg-center"
+                            style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face')">
+                        </div>
+                        <div class="size-16 rounded-full border-4 border-white bg-slate-200 bg-cover bg-center"
+                            style="background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face')">
+                        </div>
+                        <div
+                            class="size-16 rounded-full border-4 border-white bg-primary flex items-center justify-center text-white font-bold">
+                            +12</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section class="py-24 px-6 bg-slate-50 border-y border-slate-200" id="contact">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-6">Ready to scale your next project?</h2>
+                <p class="text-xl text-slate-500 mb-10 leading-relaxed">
+                    Let's discuss how our engineering expertise can drive efficiency for your business.
+                </p>
+                <a href="book-call.html" class="btn btn-lg btn-primary shadow-lg shadow-primary/20">
+                    Book Strategy Call
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/pages/landing.js"></script>
+</body>
+
+</html>
